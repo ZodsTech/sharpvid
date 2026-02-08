@@ -1,0 +1,17 @@
+{
+  "name": "sharpvid",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "server": "node server.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "firebase-admin": "^13.6.1",
+    "multer": "^2.0.2",
+    "node-fetch": "^3.3.2",
+    "vite": "^5.4.8"
+  }
+}
