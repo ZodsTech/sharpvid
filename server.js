@@ -30,6 +30,10 @@ const app = express();
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
+app.get("/", (req, res) => {
+    res.send("SharpVid API is running ✅");
+    });
+
 /* ===============================
    📁 PROJECT ROOT (MUST BE ABOVE MULTER)
 ================================= */
@@ -237,6 +241,8 @@ app.post("/api/tts", async (req, res) => {
       success: true,
       projectId,
     file: `/projects/${uid}/${projectId}/scenes/${sceneId}/audio/voice.mp3`
+    });
+
   } catch (err) {
     console.error("❌ TTS Error:", err);
     res.status(500).json({ error: err.message });
