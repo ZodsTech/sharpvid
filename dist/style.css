@@ -1,0 +1,664 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0f172a;
+  color: white;
+}
+
+.topbar {
+  padding: 18px;
+  background: linear-gradient(to right, #1e3a8a, #0f172a);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.badge {
+  background: rgba(0,255,200,0.15);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.promo-banner {
+  overflow: hidden;
+  background: rgba(255,255,255,0.05);
+  padding: 10px;
+}
+
+.promo-track {
+  display: inline-block;
+  white-space: nowrap;
+  animation: scrollText 12s linear infinite;
+}
+
+@keyframes scrollText {
+  from { transform: translateX(100%); }
+  to { transform: translateX(-100%); }
+}
+
+.app {
+  padding: 18px;
+  padding-bottom: 90px;
+}
+
+.quick-actions {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
+}
+
+.action-card {
+  width: 90px;
+  height: 90px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.06);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.3s;
+  animation: fadeUp 0.8s ease;
+}
+
+.action-card:hover {
+  transform: scale(1.05);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+textarea {
+  width: 100%;
+  height: 120px;
+  border-radius: 18px;
+  padding: 14px;
+  border: none;
+  outline: none;
+  background: rgba(255,255,255,0.07);
+  color: white;
+  font-size: 15px;
+}
+
+button, select {
+  width: 100%;
+  padding: 14px;
+  margin-top: 12px;
+  border-radius: 16px;
+  border: none;
+  font-size: 16px;
+}
+
+.primary-btn {
+  background: #0284c7;
+  color: white;
+}
+
+.success-btn {
+  background: #16a34a;
+  color: white;
+}
+
+.secondary-btn {
+  background: rgba(255,255,255,0.1);
+  color: white;
+}
+
+.danger-btn {
+  background: #dc2626;
+  color: white;
+}
+
+video, audio {
+  width: 100%;
+  margin-top: 12px;
+  border-radius: 16px;
+}
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: rgba(15,23,42,0.95);
+  display: flex;
+  justify-content: space-around;
+  padding: 12px 0;
+}
+
+.bottom-nav button {
+  background: none;
+  color: gray;
+  font-size: 14px;
+}
+
+.bottom-nav button.active {
+  color: #22c55e;
+  font-weight: bold;
+}
+
+.tab-section {
+  display: none;
+}
+
+.tab-section.active {
+  display: block;
+}
+
+.marquee {
+  padding: 12px 0;
+  font-size: 15px;
+  overflow: hidden;
+}
+
+/* ============================================
+   ✅ PREMIUM FORM PANEL FIX (Opay Style)
+============================================ */
+
+/* Labels */
+label {
+  font-size: 15px;
+  font-weight: 600;
+  margin: 12px 0 6px;
+  display: block;
+  color: #eaf3ff;
+}
+
+/* Dropdown + Inputs */
+select,
+textarea {
+  width: 100%;
+  max-width: 420px;
+  padding: 14px;
+  border-radius: 18px;
+  border: none;
+  outline: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+  font-size: 15px;
+  margin: 8px auto;
+  display: block;
+}
+
+/* Dropdown arrow fix */
+select option {
+  color: black;
+}
+
+/* Buttons Premium Look */
+button {
+  width: 100%;
+  max-width: 420px;
+  margin: 12px auto;
+  display: block;
+  padding: 16px;
+  border-radius: 20px;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+/* Generate Video Button */
+#generateVideoBtn {
+  background: linear-gradient(to right, #16a34a, #22c55e);
+  color: white;
+  box-shadow: 0 6px 18px rgba(34, 197, 94, 0.35);
+}
+
+#generateVideoBtn:hover {
+  transform: scale(1.02);
+}
+
+/* Generate Voice Button */
+#generateBtn {
+  background: linear-gradient(to right, #0284c7, #0ea5e9);
+  color: white;
+  box-shadow: 0 6px 18px rgba(14, 165, 233, 0.35);
+}
+
+/* Download Buttons */
+#downloadBtn,
+#downloadVideoBtn,
+#downloadSubBtn {
+  background: rgba(255, 255, 255, 0.08);
+  color: #f1f5f9;
+}
+
+#downloadBtn:hover,
+#downloadVideoBtn:hover,
+#downloadSubBtn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Disabled look */
+button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* ============================================
+   ✅ FLOATING PLUS BUTTON FIX
+============================================ */
+
+.controls-panel {
+  width: 100%;
+  max-width: 420px;
+  margin: 20px auto;
+  padding: 18px;
+  border-radius: 22px;
+  background: rgba(255,255,255,0.06);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+
+/* ============================================
+   ✅ UI POLISH PATCH (Opay Premium Feel)
+============================================ */
+
+/* Make all form controls NOT full-width */
+select,
+button,
+textarea,
+audio,
+video {
+  max-width: 92%;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+/* Controls Card Wrapper Look */
+#homeTab select,
+#homeTab button,
+#homeTab textarea {
+  border-radius: 18px;
+}
+
+/* Dropdowns slimmer + modern */
+select {
+  padding: 14px 18px;
+  font-size: 15px;
+  background: rgba(255,255,255,0.08);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.12);
+  margin-top: 8px;
+  margin-bottom: 18px;
+}
+
+/* Buttons more premium */
+.primary-btn {
+  background: linear-gradient(to right, #00b7ff, #0077ff);
+}
+
+.success-btn {
+  background: linear-gradient(to right, #22c55e, #16a34a);
+}
+
+.secondary-btn {
+  background: rgba(255,255,255,0.07);
+  color: white;
+}
+
+.secondary-btn:hover {
+  background: rgba(255,255,255,0.14);
+}
+
+/* Make Download buttons less dull */
+button:disabled {
+  opacity: 0.35;
+}
+
+/* Textarea nicer */
+textarea {
+  min-height: 130px;
+  padding: 18px;
+  font-size: 15px;
+  line-height: 1.5;
+  background: rgba(255,255,255,0.06);
+}
+
+/* Video Preview Card */
+video {
+  border-radius: 20px;
+  margin-top: 12px;
+  box-shadow: 0 0 18px rgba(0,0,0,0.35);
+}
+
+/* ============================================
+   ✅ Slow Marquee Banner
+============================================ */
+
+.promo-track {
+  animation-duration: 22s !important;
+}
+
+/* ============================================
+   ✅ Reduce Huge Box Feel
+============================================ */
+
+.tab-section {
+  padding-bottom: 140px;
+}
+
+/* ============================================
+   ✅ Better Headings Spacing
+============================================ */
+
+h3 {
+  max-width: 92%;
+  margin: 20px auto 6px auto;
+  font-size: 16px;
+  opacity: 0.9;
+}.promo-track {
+  animation-duration: 35s !important;
+}
+
+video {
+  background: rgba(255,255,255,0.05);
+  padding: 10px;
+}
+
+button:disabled {
+  opacity: 0.25 !important;
+  filter: grayscale(100%);
+}
+
+/* ===============================
+   ✅ OPAY TAB ANIMATION SYSTEM
+================================ */
+
+.tab-section {
+  display: none;
+  opacity: 0;
+  transform: translateX(30px);
+  transition: all 0.35s ease;
+}
+
+.tab-section.active {
+  display: block;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Bottom nav smooth highlight */
+.bottom-nav button {
+  transition: all 0.25s ease;
+}
+
+.bottom-nav button.active {
+  color: #00ff99;
+  transform: scale(1.05);
+}
+
+.preview-box {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  overflow-x: auto;
+  padding: 10px;
+}
+
+.preview-box img {
+  height: 70px;
+  border-radius: 12px;
+  border: 2px solid #ddd;
+}
+
+/* ===============================
+   📸 Slide Preview Grid
+================================= */
+.preview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.preview-grid img {
+  width: 100%;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+}
+
+/* ===============================
+   ✅ Floating Upload Menu (FAB)
+================================= */
+
+.fab-container {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  z-index: 999;
+}
+
+.floating-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  font-size: 28px;
+  font-weight: bold;
+  background: linear-gradient(135deg, #00c853, #009624);
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
+/* Menu hidden by default */
+.fab-menu {
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 15px;
+  position: absolute;
+  bottom: 70px;
+  right: 0;
+}
+
+.fab-menu button {
+  background: #1e1e2f;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+.fab-menu button:hover {
+  background: #00c853;
+}
+
+/* 🔒 Premium Modal */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-box {
+  background: #fff;
+  width: 90%;
+  max-width: 420px;
+  padding: 24px;
+  border-radius: 16px;
+  text-align: center;
+  animation: pop 0.25s ease;
+}
+
+.modal-box h2 {
+  margin-bottom: 10px;
+}
+
+.modal-box ul {
+  text-align: left;
+  margin: 15px 0;
+}
+
+.modal-box li {
+  margin: 6px 0;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+@keyframes pop {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.upload-item.locked {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.upload-item.locked:hover {
+  opacity: 0.8;
+}
+
+/* ===============================
+   🎬 FINAL STUDIO POLISH PATCH
+================================ */
+
+/* Upload card */
+.card {
+  background: rgba(255,255,255,0.05);
+  border-radius: 18px;
+  padding: 16px;
+  margin: 16px auto;
+  max-width: 420px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+}
+
+/* Locked premium upload box */
+.upload-item {
+  margin-top: 12px;
+  padding: 14px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.06);
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Modal dark theme match */
+.modal-box {
+  background: #0f172a;
+  color: white;
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+/* FAB hover polish */
+.floating-btn:hover {
+  transform: scale(1.08);
+}
+
+/* Thumbnail hover */
+.preview-grid img:hover {
+  transform: scale(1.05);
+  border-color: #22c55e;
+}
+
+/* ===============================
+   📊 Render Progress Bar
+================================= */
+
+.progress-wrap {
+  margin-top: 12px;
+  width: 100%;
+  height: 22px;
+  background: #1e293b;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg,#22c55e,#4ade80);
+  transition: width 0.4s ease;
+}
+
+.progress-text {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  top: 2px;
+  color: white;
+}
+
+.hidden {
+  display: none;
+}
+
+.preset-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+.preset-grid button{
+  padding:10px;
+  border-radius:8px;
+}
+
+.draggable-slide {
+  cursor: grab;
+}
+
+.timeline-row {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:8px;
+}
+
+.timeline-thumb {
+  width:60px;
+  height:40px;
+  object-fit:cover;
+}
+
+.scene-timeline {
+  display: flex;
+  gap: 6px;
+  height: 36px;
+  background: #111;
+  padding: 6px;
+  border-radius: 8px;
+}
+
+.scene-bar {
+  background: linear-gradient(90deg,#4fd1c5,#63b3ed);
+  border-radius: 6px;
+  position: relative;
+  cursor: ew-resize;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
+  color:#000;
+  user-select:none;
+}
