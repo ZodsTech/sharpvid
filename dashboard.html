@@ -5,283 +5,839 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>SharpVid Studio</title>
 
-  <link rel="stylesheet" href="style.css?v=1002" />
+  <link rel="stylesheet" href="style.css?v=1001" />
 </head>
 
 <body>
 
-<!-- 🔥 TOP HEADER -->
+  <!-- ================= HEADER STACK ================= -->
+<div class="header-stack">
+
+  <!-- 🔥 TOP HEADER -->
   <header class="topbar">
-    <div>
-      <h2>Hi, Creator 👋</h2>
-      <p id="plan-status" class="badge">🪪 Plan: FREE</p>
-      <p id="project-label" class="badge">📁 Project: —</p>
-      <div class="card">
-  <h3>🎬 Scenes</h3>
-  <button onclick="setScene('s1')">Scene 1</button>
-  <button onclick="setScene('s2')">Scene 2</button>
-  <button onclick="setScene('s3')">Scene 3</button>
-      </div>
-      <p id="usage-status" class="badge">📊 Usage: —</p>
+    <div class="left">
+      <h2 class="greeting-wrap">
+        <span class="hi-line">Hi, 👋</span>
+        <span id="headerUserName" class="name-line">SharpVid CEO</span>
+        <span id="timeGreeting" class="time-greeting hidden"></span>
+      </h2>
     </div>
-    <div class="logo">🎥 SharpVid</div>
+    <div class="logo">🎥 SharpVid
+      <button id="appMenuBtn" class="menu-trigger">
+        ☰
+          </button>
+    </div>
   </header>
 
-<!-- 🔥 PROMO -->
-<div class="promo-banner">
-  <div class="promo-track">
-    ✨ Create Voice + Video Instantly 🚀
-    🔥 TikTok + YouTube Ready
-    🎬 Karaoke Captions Supported
-  </div>
-</div>
-
-<main class="app">
-
-<!-- QUICK ACTIONS -->
-<section class="quick-actions">
-  <div class="action-card" onclick="showTab('home')">🎙<span>Voice</span></div>
-  <div class="action-card" onclick="showTab('home')">🎬<span>Video</span></div>
-  <div class="action-card" onclick="showTab('home')">📝<span>Captions</span></div>
-</section>
-
-<!-- ================= HOME ================= -->
-<section id="homeTab" class="tab-section active">
-
-<textarea id="scriptInput" placeholder="Write your story script here..."></textarea>
-
-<button id="generateBtn" class="primary-btn">
-🎙 Generate Voice
-</button>
-
-<div class="controls-panel">
-  
-  <!-- 🎯 Export Presets -->
-<div class="card">
-  <h3>⚡ Quick Presets</h3>
-
-  <div class="preset-grid">
-    <button onclick="applyPreset('tiktok')">📱 TikTok</button>
-    <button onclick="applyPreset('reels')">🎞 Reels</button>
-    <button onclick="applyPreset('youtube')">📺 YouTube</button>
-    <button onclick="applyPreset('hd')">💎 Landscape HD</button>
-  </div>
-</div>
-
-  <div class="card">
-  <h3>📦 Export Bundles</h3>
-
-  <div class="bundle-grid">
-    <button class="secondary-btn" id="bundleTikTok">📱 TikTok</button>
-    <button class="secondary-btn" id="bundleYouTube">📺 YouTube</button>
-    <button class="secondary-btn" id="bundleReels">🎬 Reels</button>
-    <button class="secondary-btn" id="bundleClean">🧼 Clean HD</button>
-  </div>
-</div>
-
-<label>📐 Video Format</label>
-<select id="formatSelect">
-<option value="landscape">📺 YouTube</option>
-<option value="vertical">📱 TikTok</option>
-</select>
-
-<label>📝 Caption Mode</label>
-<select id="captionMode">
-<option value="srt">Subtitle File (.srt)</option>
-<option value="burn">Burn Captions</option>
-<option value="karaoke">🎤 Karaoke</option>
-</select>
-
-<!-- ===== Upload Card ===== -->
-<div class="card">
-<h3>📤 Upload Slides</h3>
-
-<input type="file" id="slideUpload" multiple accept="image/*">
-<button id="uploadSlidesBtn">Upload Slides</button>
-
-<div id="slidePreview" class="preview-grid"></div>
-  <!-- 🎞 Slide Timeline -->
-<div class="card">
-  <h3>🎞 Slide Timeline</h3>
-  <div id="timelineEditor"></div>
-</div>
-
-<!-- Premium Music Box -->
-<div class="upload-item locked" id="musicUploadBox">
-🎵 Background Music <span class="lock">🔒 Premium</span>
-</div>
-
-</div>
-
-<button id="generateVideoBtn" class="success-btn">
-🎬 Generate Video
-</button>
-
-  <button id="exportAllBtn" class="secondary-btn">
-📦 Export All Formats
-</button>
-  
-  <div class="card">
-  <h3>🧵 Render Queue</h3>
-  <button id="addQueueBtn" class="secondary-btn">
-    ➕ Add To Queue
-  </button>
-
-  <div id="queueList"></div>
-  </div>
-  
-  <!-- 📊 Render Progress -->
-<div id="renderProgressWrap" class="progress-wrap hidden">
-  <div id="renderProgressBar" class="progress-bar"></div>
-  <div id="renderProgressText" class="progress-text">
-    Preparing…
-  </div>
-</div>
-
-<button id="downloadSubBtn" disabled class="secondary-btn">
-⬇ Download Subtitles
-</button>
-
-<button id="downloadBtn" disabled class="secondary-btn">
-⬇ Download Audio
-</button>
-
-  <!-- 📝 Subtitle Editor -->
-  <div class="card">
-    <h3>📝 Subtitle Editor</h3>
-    <textarea id="subtitleEditor" rows="10"></textarea>
-    <button id="loadSubsBtn">Load Subtitles</button>
-    <button id="saveSubsBtn">Save Edits</button>
+  <!-- 💎 Premium Banner -->
+  <div id="premiumWelcome" class="hidden premium-banner">
+    💎 Premium Activated — Watermark Removed!
   </div>
 
-  <!-- Subtitle Style Controls -->
-<div class="card">
-  <h3>🎨 Subtitle Style</h3>
+  <!-- 🔥 PROMO -->
+  <div class="promo-banner">
+    <div class="promo-track">
 
-  <label>🎭 Preset Theme</label>
-<select id="subTheme">
-  <option value="">Custom</option>
-  <option value="tiktok">🔥 TikTok Bold</option>
-  <option value="youtube">📺 YouTube Clean</option>
-  <option value="reels">📱 Reels Pop</option>
-  <option value="minimal">🧼 Minimal</option>
-</select>
+      <!-- ORIGINAL CONTENT -->
+      <div class="promo-group">
+        <span>✨ Create Voice + Video Instantly 🚀</span>
+        <span>🔥 TikTok + YouTube Ready</span>
+        <span>🎬 Karaoke Captions Supported</span>
+        <span>🎙 AI Voice Generator</span>
+        <span>🎬 Slide-to-Video Engine</span>
+        <span>📝 Smart Caption Modes (SRT / Burn / Karaoke)</span>
+        <span>🎨 Custom Subtitle Styling</span>
+        <span>📱 TikTok / Reels / YouTube Presets</span>
+        <span>🎞 Multi-Scene Video Stitching</span>
+        <span>🎚 Cinematic Scene Transitions</span>
+        <span>📦 One-Click Export Bundles</span>
+        <span>🧵 Render Queue System</span>
+        <span>🎵 Background Music + Smart Ducking</span>
+        <span>🎧 Auto Audio Duration Sync</span>
+        <span>📐 Landscape & Vertical Formats</span>
+        <span>💎 HD 1080p Premium Export</span>
+        <span>🚫 Watermark-Free Premium</span>
+        <span>⚡ Fast Render Pipeline</span>
+        <span>🎓 Guided Creator Onboarding</span>
+        <span>🚀 Built for Content Creators</span>
+      </div>
 
-  <label>Font Size</label>
-  <input id="subFontSize" type="number" value="42">
+      <!-- DUPLICATE FOR SEAMLESS LOOP -->
+      <div class="promo-group">
+        <span>✨ Create Voice + Video Instantly 🚀</span>
+        <span>🔥 TikTok + YouTube Ready</span>
+        <span>🎬 Karaoke Captions Supported</span>
+        <span>🎙 AI Voice Generator</span>
+        <span>🎬 Slide-to-Video Engine</span>
+        <span>📝 Smart Caption Modes (SRT / Burn / Karaoke)</span>
+        <span>🎨 Custom Subtitle Styling</span>
+        <span>📱 TikTok / Reels / YouTube Presets</span>
+        <span>🎞 Multi-Scene Video Stitching</span>
+        <span>🎚 Cinematic Scene Transitions</span>
+        <span>📦 One-Click Export Bundles</span>
+        <span>🧵 Render Queue System</span>
+        <span>🎵 Background Music + Smart Ducking</span>
+        <span>🎧 Auto Audio Duration Sync</span>
+        <span>📐 Landscape & Vertical Formats</span>
+        <span>💎 HD 1080p Premium Export</span>
+        <span>🚫 Watermark-Free Premium</span>
+        <span>⚡ Fast Render Pipeline</span>
+        <span>🎓 Guided Creator Onboarding</span>
+        <span>🚀 Built for Content Creators</span>
+      </div>
 
-  <label>Bottom Margin</label>
-  <input id="subMarginV" type="number" value="160">
-
-  <label>Outline</label>
-  <input id="subOutline" type="number" value="2">
-
-  <label>Alignment</label>
-  <select id="subAlign">
-    <option value="2">Bottom Center</option>
-    <option value="8">Top Center</option>
-  </select>
-</div>
-
-  <!-- 🎶 Music Ducking Controls -->
-  <div class="card">
-  <h3>🎨 Music Style</h3>
-  <label>🎵 Music Ducking Strength</label>
-<select id="duckLevel">
-  <option value="0.15">Strong Duck</option>
-  <option value="0.25" selected>Medium Duck</option>
-  <option value="0.40">Light Duck</option>
-</select>
+    </div>
   </div>
 
-<audio id="audioPlayer" controls></audio>
+  <!-- 👋 Welcome -->  
+  <div id="welcomeBanner" class="welcome-banner hidden">  
 
-<h2>📽 Generated Video</h2>
-<video id="videoPlayer" controls></video>
-  
-  <button id="publishBtn" class="success-btn">
-  🚀 Publish
-  </button>
+    <div class="welcome-text">  
+      👋 Welcome back —  
+      <span id="welcomeProjectText"></span>  
+    </div>  
 
-  <label>🎞 Scene Transition</label>
-  <select id="sceneTransition">
-    <option value="fade">Fade</option>
-    <option value="dissolve">Dissolve</option>
-    <option value="dipblack">Dip to Black</option>
-  </select>
+  </div>
 
-  <button id="stitchBtn" class="success-btn">
-🎬 Stitch All Scenes
-</button>
+  <!-- Header with Resume and New Project buttons -->
+  <!-- 🚀 Project Actions -->
+  <div id="project-header" class="project-header">
 
-<button id="downloadVideoBtn" disabled class="secondary-btn">
-⬇ Download Video
-</button>
+    <button id="resumeProjectBtn" class="project-action-btn">
+      ▶ Resume
+    </button>
 
-</section>
-  
-  <div class="card">
-  <h3>⏱ Scene Timeline</h3>
-  <div id="sceneTimeline" class="scene-timeline"></div>
+    <button id="newProjectBtn" class="project-action-btn">
+      + New Project
+    </button>
+
+  </div>
+
+  <!-- 📡 STATUS STRIP -->
+  <div class="status-strip">
+    <span id="statusPlan">🪪 Plan: —</span>
+    <span id="statusUsage">📊 Usage: —</span>
+    <span id="statusProject">📁 Project: —</span>
+    <span id="statusScene">🎬 Scene: —</span>
+    <span id="statusQueue">🧵 Queue: 0</span>
+  </div>
+
 </div>
 
-<!-- ================= PROJECTS ================= -->
-  <section id="projectsTab" class="tab-section">
-  <h2>📁 Projects</h2>
-  <div id="projectsList"></div>
+
+  <main class="app">
+    <section id="homeTab" class="tab-section active">
+
+
+  <!-- QUICK ACTIONS -->
+      <!-- HERO ACTIONS -->
+      <section class="hero-actions">
+
+        <button class="hero-card" onclick="scrollToVoice()">
+          <span class="hero-icon">🎙</span>
+          <span>Voice</span>
+        </button>
+
+        <button id="manualSaveBtn" class="hero-card save-project-btn">
+          <span class="hero-icon">💾</span>
+          <span>Save</span>
+        </button>
+
+        <button class="hero-card" onclick="scrollToVideo()">
+          <span class="hero-icon">🎬</span>
+          <span>Video</span>
+        </button>
+
+        <button class="hero-card" onclick="scrollToCaptions()">
+          <span class="hero-icon">📝</span>
+          <span>Captions</span>
+        </button>
+
+      </section>
+
+
+
+    <!-- ================= PROJECT + SCENE ================= -->
+    <div class="card scene-card">
+
+      <!-- Scene Buttons -->
+      <div class="quick-presets">
+
+        <button class="btn btn-secondary scene-btn">
+          🎬 Scene 1
+        </button>
+
+        <button class="btn btn-secondary scene-btn">
+          🎬 Scene 2
+        </button>
+
+        <button class="btn btn-secondary scene-btn">
+          🎬 Scene 3
+        </button>
+
+      </div>
+
+      <!-- Transition -->
+      <label>🎞 Scene Transition</label>
+
+      <select id="sceneTransition">
+        <option value="fade">Fade</option>
+        <option value="dissolve">Dissolve</option>
+        <option value="dipblack">Dip to Black</option>
+      </select>
+
+      <!-- Stitch -->
+      <button id="stitchBtn"
+        class="btn btn-primary btn-block">
+        🎬 Stitch All Scenes
+      </button>
+
+    </div>
+
+    <!-- ================= SCRIPT ================= -->
+    <div class="card script-card">
+
+      <h3>📝 Script</h3>
+
+      <textarea
+        id="scriptInput"
+        placeholder="Write your story script here...">
+      </textarea>
+
+      <button
+        id="aiScriptBtn"
+        class="btn btn-secondary btn-block">
+        ✨ AI Script Assist
+      </button>
+
+    </div>
+
+    <!-- ================= VOICE ================= -->
+    <div class="card voice-card">
+
+      <h3>🎙 Voice</h3>
+
+      <label>Select Voice</label>
+      <select id="voiceSelect"></select>
+
+      <div class="voice-actions">
+        <button id="previewVoiceBtn" class="btn btn-secondary">
+          🔊 Preview
+        </button>
+
+        <button id="randomVoiceBtn" class="btn btn-secondary">
+          🎲 Random
+        </button>
+      </div>
+
+      <button id="generateBtn" class="btn btn-primary btn-block">
+        🎙 Generate Voice
+      </button>
+
+      <audio id="audioPlayer" controls></audio>
+
+      <button id="downloadBtn" disabled class="btn btn-secondary btn-block">
+        ⬇ Download Audio
+      </button>
+
+    </div>
+
+
+    <!-- ================= SLIDES ================= -->
+    <div class="card card-light">
+
+      <h3>📤 Slides</h3>
+
+      <input type="file"
+             id="slideUpload"
+             multiple
+             accept="image/*">
+
+      <button id="uploadSlidesBtn" class="btn btn-primary btn-block">
+        Upload Slides
+      </button>
+
+      <div id="slidePreview" class="preview-grid"></div>
+
+    </div>
+
+
+    <!-- ================= TIMELINE ================= -->
+    <div class="card card-dark">
+      <h3>🎞 Slide Timeline</h3>
+      <div id="timelineEditor"></div>
+    </div>
+
+      <div class="history-controls">
+  <button id="undoBtn" class="btn btn-secondary">↩ Undo</button>
+  <button id="redoBtn" class="btn btn-secondary">↪ Redo</button>
+      </div>
+
+    <div class="card card-dark">
+      <h3>⏱ Scene Timeline</h3>
+      <div id="sceneTimeline" class="scene-timeline"></div>
+    </div>
+
+    <!-- ================= VIDEO SETTINGS ================= -->
+    <div class="card card-dark">
+
+      <h3>🎬 Video Settings</h3>
+
+      <label>📐 Video Format</label>
+      <select id="formatSelect">
+        <option value="landscape">📺 YouTube</option>
+        <option value="vertical">📱 TikTok</option>
+      </select>
+
+      <label>📝 Caption Mode</label>
+      <select id="captionMode">
+        <option value="srt">Subtitle File (.srt)</option>
+        <option value="burn">Burn Captions</option>
+        <option value="karaoke" data-premium="true">
+  🎤 Karaoke 🔒
+</option>
+      </select>
+
+      <div id="musicUploadBox" class="locked-feature">
+        🎵 Background Music
+        <span class="lock-badge">🔒 Premium</span>
+      </div>
+
+    </div>
+
+
+
+    <!-- ================= QUICK PRESETS ================= -->
+    <div class="card card-light">
+
+      <h3>⚡ Quick Presets</h3>
+
+      <div class="quick-presets">
+        <button class="btn btn-secondary" onclick="applyQuickPreset('tiktok')">
+          📱 TikTok
+        </button>
+
+        <button class="btn btn-secondary" onclick="applyQuickPreset('reels')">
+          🎞 Reels
+        </button>
+
+        <button class="btn btn-secondary" onclick="applyQuickPreset('youtube')">
+          📺 YouTube
+        </button>
+
+        <button id="presetHD" class="btn btn-primary">
+  💎 Landscape HD 🔒
+</button>
+      </div>
+
+    </div>
+
+
+
+    <!-- ================= EXPORT BUNDLES ================= -->
+    <div class="card card-dark">
+
+      <h3>📦 Export Bundles</h3>
+
+      <div class="quick-presets">
+        <button class="btn btn-secondary" id="bundleTikTok">
+          📱 TikTok
+        </button>
+
+        <button class="btn btn-secondary" id="bundleYouTube">
+          📺 YouTube
+        </button>
+
+        <button class="btn btn-secondary" id="bundleReels">
+          🎬 Reels
+        </button>
+
+        <button class="btn btn-primary" id="bundleClean">
+          🧼 Clean HD
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ================= SUBTITLE EDITOR ================= -->
+    <div class="card card-script">
+
+      <h3>📝 Subtitle Editor</h3>
+
+      <textarea id="subtitleEditor" rows="8"
+        placeholder="Edit subtitles here..."></textarea>
+
+      <div class="quick-presets">
+        <button id="loadSubsBtn" class="btn btn-secondary">
+          📂 Load
+        </button>
+
+        <button id="saveSubsBtn" class="btn btn-primary">
+          💾 Save
+        </button>
+
+        <button id="downloadSubBtn"
+          class="btn btn-secondary"
+          disabled>
+          ⬇ Download
+        </button>
+      </div>
+
+    </div>
+
+
+
+    <!-- ================= SUBTITLE STYLE ================= -->
+    <div class="card card-light">
+
+      <h3>🎨 Subtitle Style</h3>
+
+      <div class="form-grid">
+
+        <div>
+          <label>Theme</label>
+          <select id="subTheme">
+            <option value="">Custom</option>
+            <option value="tiktok">🔥 TikTok Bold</option>
+            <option value="youtube">📺 YouTube Clean</option>
+            <option value="reels">📱 Reels Pop</option>
+            <option value="minimal">🧼 Minimal</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Font Size</label>
+          <input id="subFontSize" type="number" value="42">
+        </div>
+
+        <div>
+          <label>Bottom Margin</label>
+          <input id="subMarginV" type="number" value="160">
+        </div>
+
+        <div>
+          <label>Outline</label>
+          <input id="subOutline" type="number" value="2">
+        </div>
+
+        <div>
+          <label>Alignment</label>
+          <select id="subAlign">
+            <option value="2">Bottom Center</option>
+            <option value="8">Top Center</option>
+          </select>
+        </div>
+
+      </div>
+
+    </div>
+
+  <!-- ================= MUSIC ================= -->
+  <div class="card card-light">
+
+    <h3>🎵 Music Ducking</h3>
+
+    <div class="form-grid">
+      <div>
+        <label>Ducking Strength</label>
+        <select id="duckLevel">
+          <option value="0.15">Strong Duck</option>
+          <option value="0.25" selected>Medium Duck</option>
+          <option value="0.40">Light Duck</option>
+        </select>
+      </div>
+    </div>
+
+  </div>
+
+
+
+  <!-- ================= VIDEO GENERATION ================= -->
+  <div class="card card-dark">
+
+    <h3>🎬 Render</h3>
+
+    <div class="quick-presets">
+
+      <button id="generateVideoBtn" class="btn btn-primary">
+        🎬 Generate
+      </button>
+
+      <button id="addQueueBtn" class="btn btn-secondary">
+        ➕ Queue
+      </button>
+
+      <button id="exportAllBtn" class="btn btn-secondary">
+        📦 Export All
+      </button>
+
+    </div>
+
+    <div id="queueList" class="queue-box"></div>
+
+  </div>
+
+
+
+  <!-- ================= PROGRESS ================= -->
+  <div id="renderProgressWrap" class="progress-wrap hidden">
+    <div id="renderProgressBar" class="progress-bar"></div>
+    <div id="renderProgressText" class="progress-text">Preparing…</div>
+  </div>
+
+
+
+  <!-- ================= OUTPUT ================= -->
+  <div class="card card-script">
+
+    <h3>📽 Generated Video</h3>
+
+    <video id="videoPlayer" controls></video>
+
+    <div class="quick-presets">
+
+      <button id="downloadVideoBtn"
+        disabled
+        class="btn btn-secondary">
+        ⬇ Download
+      </button>
+
+      <button id="publishBtn"
+        class="btn btn-primary">
+        🚀 Publish
+      </button>
+
+    </div>
+
+  </div>
   </section>
 
-<!-- ================= SETTINGS ================= -->
-<section id="settingsTab" class="tab-section">
-<h2>⚙ Settings</h2>
-<button id="logoutBtn" class="danger-btn">🚪 Logout</button>
-</section>
+    <!-- ================= PROJECTS ================= -->
+    <section id="projectsTab" class="tab-section">
 
+      <div class="card card-dark">
+
+        <div class="section-head">
+          <h2>📁 Projects</h2>
+          <button class="btn btn-primary btn-sm">
+            ➕ New Project
+          </button>
+        </div>
+
+        <div id="projectsList" class="projects-grid"></div>
+
+      </div>
+
+    </section>
+
+    <!-- ================= SETTINGS ================= -->
+<section id="settingsTab" class="tab-section">
+
+  <div class="card card-light">
+
+    <h2>⚙ Settings</h2>
+
+  </div>
+
+  <!-- 👤 Account -->
+  <div class="card card-dark">
+
+    <h3>👤 Account</h3>
+
+    <div class="settings-row">
+      <span id="userIdLabel">User: —</span>
+      <span id="planLabel">Plan: FREE</span>
+    </div>
+
+    <button class="btn btn-primary btn-block upgrade-trigger">
+      🚀 Upgrade Plan
+    </button>
+
+  </div>
+
+  <!-- 🎬 Default Render -->
+  <div class="card card-light">
+
+    <h3>🎬 Default Render</h3>
+
+    <div class="form-grid">
+
+      <div>
+        <label>Default Format</label>
+        <select id="defaultFormat">
+          <option value="landscape">Landscape</option>
+          <option value="vertical">Vertical</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Default Caption Mode</label>
+        <select id="defaultCaption">
+          <option value="srt">SRT File</option>
+          <option value="burn">Burned In</option>
+          <option value="karaoke">Karaoke</option>
+        </select>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- 🎨 Subtitle Defaults -->
+  <div class="card card-dark">
+
+    <h3>🎨 Subtitle Defaults</h3>
+
+    <select id="defaultTheme">
+      <option value="tiktok">TikTok Bold</option>
+      <option value="youtube">YouTube Clean</option>
+      <option value="reels">Reels Pop</option>
+      <option value="minimal">Minimal</option>
+    </select>
+
+  </div>
+
+  <!-- 🔊 Audio Defaults -->
+  <div class="card card-light">
+
+    <h3>🔊 Audio Defaults</h3>
+
+    <div class="form-grid">
+
+      <div>
+        <label>Default Voice</label>
+        <select id="defaultVoice"></select>
+      </div>
+
+      <div>
+        <label>Ducking Strength</label>
+        <select id="defaultDuck">
+          <option value="0.15">Strong</option>
+          <option value="0.25">Medium</option>
+          <option value="0.40">Light</option>
+        </select>
+      </div>
+
+    </div>
+
+  </div>
+
+    <!-- 💾 Preferences -->
+    <div class="card card-dark">
+
+      <h3>💾 Preferences</h3>
+
+      <div class="settings-stack">
+
+        <label class="checkbox-row">
+          <input type="checkbox" id="autosaveToggle" checked>
+          <span>Auto-save projects</span>
+        </label>
+
+        <div>
+          <label>Default Scene Transition</label>
+          <select id="defaultTransition">
+            <option value="fade">Fade</option>
+            <option value="dissolve">Dissolve</option>
+            <option value="dipblack">Dip to Black</option>
+          </select>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- 🧹 System -->
+    <div class="card card-light">
+
+      <h3>🧹 System</h3>
+
+      <div class="system-actions">
+
+        <button id="clearCacheBtn" class="btn btn-secondary">
+          🧹 Clear Cache
+        </button>
+
+        <button id="startTourBtn" class="btn btn-secondary">
+          ❓ Start Guided Tour
+        </button>
+
+      </div>
+
+      <div class="danger-zone">
+
+        <button id="resetAppBtn" class="btn btn-danger">
+          ♻ Reset App
+        </button>
+
+        <button id="logoutBtn" class="btn btn-danger">
+          🚪 Logout
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
 </main>
 
-<!-- ================= FAB ================= -->
-<div class="fab-container">
-<button id="fabMain" class="floating-btn">+</button>
+  <!-- ================= FLOATING ACTION ================= -->
+  <div class="fab-container">
+    <button id="fabMain" class="fab">＋</button>
 
-<div id="fabMenu" class="fab-menu">
-<button id="fabSlides">📤 Slides</button>
-<button id="fabVoice">🎤 Voice</button>
-<button id="fabMusic">🎵 Music</button>
-</div>
-</div>
+    <div id="fabMenu" class="fab-menu hidden">
+      <button id="fabSlides" class="fab-item">📤 Slides</button>
+      <button id="fabVoice" class="fab-item">🎤 Voice</button>
+      <button id="fabMusic" class="fab-item">🎵 Music</button>
+    </div>
+  </div>
 
 <!-- Hidden Inputs Used By JS -->
 <input type="file" id="voiceInput" accept="audio/*" hidden>
 <input type="file" id="musicUpload" accept="audio/*" hidden>
 
-<!-- ================= BOTTOM NAV ================= -->
-<nav class="bottom-nav">
-<button onclick="showTab('home')" class="active">🏠 Home</button>
-<button onclick="showTab('projects')">📁 Projects</button>
-<button onclick="showTab('settings')">⚙ Settings</button>
-</nav>
+  <!-- 💎 PREMIUM SHOWCASE CARD -->
+  <div id="premiumShowcase" class="card hidden premium-showcase">
+
+    <div class="showcase-inner">
+      <h2>💎 Unlock Premium Power</h2>
+      <p>Create without limits. Render faster. Remove watermark.</p>
+
+      <ul class="premium-list">
+        <li>🎙 Studio AI Voices (WaveNet)</li>
+        <li>🎤 Word-by-word Karaoke Sync</li>
+        <li>🎵 Background Music + Smart Ducking</li>
+        <li>🎬 Cinematic Scene Transitions</li>
+        <li>📺 1080p Full HD Export</li>
+        <li>🚀 Unlimited Renders</li>
+        <li>✨ Watermark Removed</li>
+        <li>⚡ Priority Rendering Speed</li>
+      </ul>
+
+      <button class="btn btn-primary" onclick="openUpgradeModal()">
+        🚀 Upgrade Now
+      </button>
+    </div>
+
+  </div>
+
+  <!-- =========== BOTTOM TABS ============== -->
+
+  <nav class="bottom-nav">
+    <a href="javascript:void(0)" onclick="showTab('home')" class="active">
+      🏠 Home
+    </a>
+    <a href="javascript:void(0)" onclick="showTab('projects')">
+      📁 Projects
+    </a>
+    <a href="javascript:void(0)" onclick="showTab('settings')">
+      ⚙ Settings
+    </a>
+  </nav>
 
   <!-- ================= MODALS ================= -->
 
-  <!-- 🚀 Premium Upgrade Modal -->
+  <!-- 💎 CINEMATIC PREMIUM MODAL -->
   <div id="upgradeModal" class="modal hidden">
+
     <div class="modal-box">
-      <h2>🚀 Go Premium</h2>
-      <p>Unlock music, custom voice, HD export & watermark removal.</p>
 
-      <button id="upgradeBtn" class="primary-btn">
-        Upgrade
-      </button>
+      <div class="premium-header">
+        <h2>💎 Unlock Premium</h2>
+        <p>Create without limits.</p>
+      </div>
 
-      <button onclick="closeUpgradeModal()" class="secondary-btn">
-        Cancel
-      </button>
+      <div class="billing-toggle">
+        <span id="monthlyTab" class="active">Monthly</span>
+        <span id="yearlyTab">
+          Yearly
+          <span class="save-badge">Save 2 Months</span>
+        </span>
+      </div>
+
+      <div class="price-display">
+        <h1 id="priceValue">₦4,500</h1>
+        <p id="priceLabel">per month</p>
+        <p id="yearlyStrike" class="strike hidden">₦54,000</p>
+      </div>
+
+      <ul class="premium-features">
+        <li>🎙 Studio AI Voices (WaveNet)</li>
+        <li>🎤 Word-by-word Karaoke Sync</li>
+        <li>🎵 Background Music + Smart Ducking</li>
+        <li>🎬 Cinematic Scene Transitions</li>
+        <li>📺 1080p Full HD Export</li>
+        <li>🚀 Unlimited Renders</li>
+        <li>✨ Watermark Removed</li>
+        <li>⚡ Priority Rendering</li>
+      </ul>
+
+      <div style="margin-top:20px; display:flex; gap:12px; flex-direction:column;">
+        <button id="stripeCheckoutBtn" class="primary-btn btn-block">
+          🚀 Upgrade Now
+        </button>
+
+        <button onclick="closeUpgradeModal()" class="secondary-btn btn-block">
+          Cancel
+        </button>
+      </div>
+
     </div>
   </div>
 
-<!-- ================= SCRIPTS ================= -->
-<script type="module" src="dashboard.js"></script>
+  <!-- 👤 PROFILE SETUP MODAL -->
+  <div id="profileSetupModal" class="modal hidden">
 
+    <div class="modal-box profile-modal">
+
+      <div class="profile-header">
+        <h2>👋 Welcome to SharpVid</h2>
+        <p>Let’s personalize your creator space.</p>
+      </div>
+
+      <div class="profile-fields">
+        <input id="firstNameInput" placeholder="First Name" />
+        <input id="lastNameInput" placeholder="Last Name" />
+        <input id="usernameInput" placeholder="Username (unique)" />
+      </div>
+
+      <button id="saveProfileBtn" class="primary-btn btn-block">
+        Save & Continue 🚀
+      </button>
+
+    </div>
+  </div>
+
+  <!-- =================
+  ONBOARDING OVERLAY 
+  ================= -->
+<div id="onboardOverlay" class="onboard-overlay hidden">
+  <div class="onboard-box">
+    <h2>👋 Welcome to SharpVid</h2>
+
+    <ul class="onboard-list">
+      <li>✍ Write your script</li>
+      <li>🎙 Generate voice narration</li>
+      <li>🖼 Upload slides</li>
+      <li>🎬 Generate your video</li>
+      <li>📝 Edit subtitles if needed</li>
+    </ul>
+
+    <button id="onboardCloseBtn" class="primary-btn">
+      Got it — Let’s Create 🚀
+    </button>
+  </div>
+</div>
+
+  <!-- ============== DRIVER JS ============== -->
+  <link rel="stylesheet" href="https://unpkg.com/driver.js/dist/driver.css"/>
+  <script src="https://unpkg.com/driver.js/dist/driver.js.iife.js"></script>
+
+  <!-- 🎉 Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <!-- ================= TAB SWITCHING ================= -->
   <script>
   function showTab(tab){
     const homeTab = document.getElementById("homeTab");
@@ -290,10 +846,14 @@
     const bottomNav = document.querySelector(".bottom-nav");
 
     document.querySelectorAll(".tab-section")
-      .forEach(s=>s.classList.remove("active"));
+      .forEach(s => s.classList.remove("active"));
 
-    bottomNav.querySelectorAll("button")
-      .forEach(b=>b.classList.remove("active"));
+    const navLinks = bottomNav.querySelectorAll("a");
+
+    if (tab === "home") {
+      homeTab.classList.add("active");
+      navLinks[0].classList.add("active");
+    }
 
     if(tab==="home"){
       homeTab.classList.add("active");
@@ -302,7 +862,7 @@
 
     if(tab==="projects"){
       projectsTab.classList.add("active");
-      loadProjects();
+      if (typeof loadProjects === "function") loadProjects();
       bottomNav.children[1].classList.add("active");
     }
 
@@ -313,5 +873,161 @@
   }
   </script>
 
+  <!-- ================= MAIN APP SCRIPT ================= -->
+  <script type="module" src="dashboard.js"></script>
+
+  <!-- 🧠 Smart Error Coach -->
+<div id="coachBox" class="coach-box hidden">
+  <div id="coachText"></div>
+  <button id="coachGoBtn" class="secondary-btn">Fix it</button>
+  <button onclick="hideCoach()" class="danger-btn">✖</button>
+  </div>
+
+  <!-- AI Script Helper Modal — PRO -->
+<div id="aiScriptModal" class="modal hidden">
+  <div class="modal-box">
+    <h3>✨ AI Script Studio</h3>
+
+    <label>Topic / Idea</label>
+    <input id="aiTopic" placeholder="e.g. Malaria prevention tips">
+
+    <label>Mode</label>
+    <select id="aiScriptMode">
+      <option value="starter">Starter Script</option>
+      <option value="rewrite">Rewrite Better</option>
+      <option value="continue">Continue Script</option>
+    </select>
+
+    <label>Tone</label>
+    <select id="aiTone">
+      <option>Professional</option>
+      <option>Dramatic</option>
+      <option>Emotional</option>
+      <option>Viral</option>
+      <option>Educational</option>
+    </select>
+
+    <label>Audience</label>
+    <select id="aiAudience">
+      <option>General</option>
+      <option>Students</option>
+      <option>Kids</option>
+      <option>Business</option>
+      <option>Social Media</option>
+    </select>
+
+    <label>Length</label>
+    <select id="aiLength">
+      <option value="short">Short (~30s)</option>
+      <option value="medium">Medium (~60s)</option>
+      <option value="long">Long (~2 min)</option>
+    </select>
+
+    <button id="aiScriptRun" class="primary-btn">
+      Generate Script
+    </button>
+
+    <button onclick="closeAiScriptModal()" class="secondary-btn">
+      Cancel
+    </button>
+  </div>
+</div>
+
+  <!-- 🔺 Scroll To Top -->
+<button id="scrollTopBtn" class="scroll-top hidden">
+  ↑
+</button>
+
+<!-- ================= SIDE PANEL MENU ================= -->
+<div id="sideMenuOverlay" class="side-overlay hidden"></div>
+
+<div id="sideMenu" class="side-menu hidden">
+
+  <div class="side-header">
+
+  <div class="side-avatar-block">
+
+    <!-- 👤 USER AVATAR (SIDE MENU) -->
+    <div id="avatarWrap" class="creator-avatar">
+
+      <div id="avatarInitials" class="avatar initials"></div>
+
+      <img id="avatarImage" class="avatar image hidden" />
+
+      <div id="avatarBubble" class="avatar-bubble hidden"></div>
+
+      <input type="file"
+             id="avatarInput"
+             accept="image/*"
+             hidden />
+    </div>
+
+    <div class="creator-meta">
+      <div id="creatorName" class="creator-name">SharpVid CEO</div>
+      <div id="creatorPlan" class="creator-plan">FREE PLAN</div>
+      <div id="creatorStats" class="creator-stats">
+        📁 0 Scenes • 🧵 0 Queue
+      </div>
+    </div>
+
+  </div>
+
+  <button id="closeSideMenu">✕</button>
+
+</div>
+
+  <div class="side-section">
+
+    <div class="side-item has-sub" data-sub="projectSub">
+      📁 Current Project ▾
+    </div>
+    <!-- ================= NOTEBOOK ================= -->
+<div class="side-section">
+
+  <div class="side-item" id="openNotebook">
+    📓 Script Notebook
+  </div>
+
+  <div id="notebookPanel" class="notebook-panel hidden">
+
+    <textarea
+      id="notebookArea"
+      placeholder="Write or paste long scripts here..."
+    ></textarea>
+
+    <div class="notebook-footer">
+      <span id="notebookCount">0 words</span>
+      <button id="notebookSaveBtn">💾 Save</button>
+      <button id="insertToScriptBtn">⬆ Insert</button>
+    </div>
+
+  </div>
+
+</div>
+
+    <div id="projectSub" class="side-sub hidden">
+      <div class="side-item" id="renameProjectBtn">Rename</div>
+      <div class="side-item" id="manualSaveFromMenu">Save</div>
+      <div class="side-item" id="deleteProjectBtn">Delete</div>
+      <div class="side-item" id="undoFromMenu">Undo</div>
+      <div class="side-item" id="redoFromMenu">Redo</div>
+    </div>
+
+    <div class="side-item" id="workspaceSettingsBtn">
+      ⚙ Workspace Settings
+    </div>
+
+    <div class="side-item" id="upgradeFromMenu">
+      💎 Upgrade
+    </div>
+
+    <div class="side-item danger" id="logoutFromMenu">
+      🚪 Logout
+    </div>
+
+  </div>
+
+</div>
+  
 </body>
 </html>
