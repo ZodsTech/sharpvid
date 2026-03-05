@@ -6,7 +6,8 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  onAuthStateChanged
+  onAuthStateChanged,
+  sendPasswordResetEmail
 } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
 
 // ===============================
@@ -95,3 +96,57 @@ loginBtn.onclick = async () => {
     message.style.color = "red";
   }
 };
+
+// 🔁 Forgot Password
+const forgotLink = document.getElementById("forgotPasswordLink");
+
+forgotLink?.addEventListener("click", async (e) => {
+  e.preventDefault();
+
+  const emailInput = document.getElementById("email");
+  const email = emailInput?.value.trim();
+
+  if (!email) {
+    alert("Please enter your email first.");
+    return;
+  }
+
+  try {
+    await sendPasswordResetEmail(auth, email);
+    alert("✅ Password reset email sent! Check your inbox.");
+  } catch (error) {
+    alert("❌ " + error.message);
+  }
+});
+
+const passwordInput = document.getElementById("password");
+const togglePassword = document.getElementById("togglePassword");
+const eyeIcon = document.getElementById("eyeIcon");
+const capsWarning = document.getElementById("capsWarning");
+
+togglePassword?.addEventListener("click", () => {
+  const isHidden = passwordInput.type === "password";
+
+  passwordInput.type = isHidden ? "text" : "password";
+
+  passwordInput.classList.add("fade-switch");
+  setTimeout(() => {
+    passwordInput.classList.remove("fade-switch");
+  }, 250);
+
+  if (isHidden) {
+    passwordInput.classList.add("password-visible");
+  } else {
+    passwordInput.classList.remove("password-visible");
+  }
+});
+
+/* CAPS LOCK DETECTION */
+passwordInput?.addEventListener("keyup", (e) => {
+  const isCaps = e.getModifierState && e.getModifierState("CapsLock");
+  if (isCaps) {
+    capsWarning?.classList.remove("hidden");
+  } else {
+    capsWarning?.classList.add("hidden");
+  }
+});
