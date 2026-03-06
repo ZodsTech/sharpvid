@@ -1,1 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SharpVid Login</title>
 
+  <!-- ✅ CSS -->
+  <link rel="stylesheet" href="style.css?v=1001" />
+</head>
+
+  <body class="auth-page">
+
+  <!-- 🌌 Animated Background -->
+<div class="bg-glow"></div>
+<canvas id="particleCanvas"></canvas>
+
+  <div class="container">
+
+    <!-- 🎬 Animated Logo -->
+    <div class="logo-wrap">
+      <div class="logo-icon">🎬</div>
+      <div class="logo-text">SharpVid</div>
+    </div>
+
+    <p class="tagline">
+      Create voice + slideshow videos instantly
+    </p>
+
+    <input type="email" id="email" placeholder="Enter your email" />
+    <div class="password-wrap">
+      <input type="password" id="password" placeholder="Enter your password" />
+
+      <button type="button" id="togglePassword" class="toggle-eye" aria-label="Toggle password visibility">
+        <!-- Eye SVG -->
+        <svg id="eyeIcon" viewBox="0 0 24 24" width="22" height="22">
+          <path fill="currentColor"
+            d="M12 4.5C7 4.5 2.7 7.6 1 12c1.7 4.4 6 7.5 11 7.5s9.3-3.1 11-7.5c-1.7-4.4-6-7.5-11-7.5zm0 12.5A5 5 0 1 1 12 7a5 5 0 0 1 0 10z"/>
+        </svg>
+      </button>
+
+      <div id="capsWarning" class="caps-warning hidden">
+        ⚠ Caps Lock is ON
+      </div>
+    </div>
+
+    <button id="loginBtn" class="primary-login">
+      🔑 Login
+    </button>
+
+    <p class="forgot-wrap">
+      <a href="#" id="forgotPasswordLink">
+        Forgot Password?
+      </a>
+    </p>
+
+    <button id="signupBtn" class="secondary-signup">
+      ✨ Sign Up
+    </button>
+
+    <p id="message"></p>
+
+  </div>
+
+  <!-- ✅ Login Script -->
+  <script type="module" src="index.js"></script>
+
+  <script>
+/* ========================= */
+/* ✨ PARTICLE BACKGROUND   */
+/* ========================= */
+
+const canvas = document.getElementById("particleCanvas");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+for (let i = 0; i < 40; i++) {
+  particles.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    size: Math.random() * 2 + 1,
+    speedX: (Math.random() - 0.5) * 0.5,
+    speedY: (Math.random() - 0.5) * 0.5
+  });
+}
+
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = "rgba(0, 255, 200, 0.5)";
+
+  particles.forEach(p => {
+    p.x += p.speedX;
+    p.y += p.speedY;
+
+    if (p.x > canvas.width) p.x = 0;
+    if (p.x < 0) p.x = canvas.width;
+    if (p.y > canvas.height) p.y = 0;
+    if (p.y < 0) p.y = canvas.height;
+
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fill();
+  });
+
+  requestAnimationFrame(animateParticles);
+}
+
+animateParticles();
+
+window.addEventListener("resize", () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+</script>
+
+</body>
+  
+</html>
