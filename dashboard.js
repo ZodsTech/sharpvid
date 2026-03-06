@@ -6,17 +6,9 @@
 // ===============================
 // 📦 IMPORTS
 // ===============================
-import { initializeApp } from "firebase/app";
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-import { 
-  getDatabase, 
-  ref, 
-  onValue, 
-  set, 
-  get, 
-  update 
-} from "firebase/database";
-
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getDatabase, ref, onValue, set, get, update } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 // ===============================
 // 🔎 DOM HELPER
