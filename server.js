@@ -9,6 +9,7 @@ process.on("unhandledRejection", err => {
 import dotenv from "dotenv";
 dotenv.config();
 import express from "express";
+import cors from "cors";
 import fetch from "node-fetch";
 import fs from "fs";
 import path from "path";
@@ -44,6 +45,9 @@ if (!fs.existsSync(avatarDir)) {
    🔹 App Setup
 ================================= */
 const app = express();
+app.use(cors({
+  origin: "*"
+}));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
