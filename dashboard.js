@@ -54,6 +54,8 @@ const scriptInput = byId("scriptInput");
 const generateBtn = byId("generateBtn");
 const downloadBtn = byId("downloadBtn");
 
+const BASE_URL = window.location.origin;
+
 // Audio
 const audioPlayer = byId("audioPlayer");
 const formatSelect = byId("formatSelect");
@@ -1422,22 +1424,21 @@ async function previewVoice() {
     }
   }
 
-  const res = await fetch("/api/tts", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      text: "This is a preview of the selected voice.",
-      voiceId: selected,
-      preview: true
-    })
-  });
+  const res = await fetch(BASE_URL + "/api/tts", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    text: "This is a preview of the selected voice.",
+    voiceId: selected,
+    preview: true
+  })
+});
 
-  const data = await res.json();
-  if (!data.success) return showCoach("Voice preview failed");
+const data = await res.json();
+if (!data.success) return showCoach("Voice preview failed");
 
-  const audio = new Audio(data.file + "?t=" + Date.now());
-  audio.play();
-}
+const audio = new Audio(BASE_URL + data.file + "?t=" + Date.now());
+audio.play();
 
 // 🎲 Random Voice Selector
 function randomVoice() {
@@ -1992,39 +1993,52 @@ async function handleGenerateVoiceClick() {
     return showCoach(
       "⚠️ Script missing — type your story first",
       () => byId("scriptInput")
-      ?.scrollIntoView({ behavior: "smooth" })
+        ?.scrollIntoView({ behavior: "smooth" })
     );
   }
 
-  const res = await fetch("/api/tts", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      text,
-      voiceId: voiceSelect.value, // cleaner than byId again
-      projectId: currentProjectId,
-      uid: currentUid,
-      sceneId: currentSceneId,
-    })
-  });
+  try {
 
-  const data = await res.json();
-  if (!data.success) return alert("TTS failed");
+    const res = await fetch(BASE_URL + "/api/tts", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        text,
+        voiceId: voiceSelect.value,
+        projectId: currentProjectId,
+        uid: currentUid,
+        sceneId: currentSceneId,
+      })
+    });
 
-  currentProjectId = data.projectId;
+    const data = await res.json();
 
-  localStorage.setItem("sharpvid_project", currentProjectId);
+    if (!data.success) {
+      return alert("TTS failed");
+    }
 
-  audioPlayer.src = data.file + "?t=" + Date.now();
-  audioPlayer.play();
+    currentProjectId = data.projectId;
 
-  downloadBtn.disabled = false;
+    localStorage.setItem("sharpvid_project", currentProjectId);
 
-  localStorage.removeItem(SCRIPT_KEY);
+    // 🔊 PLAY AUDIO (FIXED UNIVERSAL WAY)
+    audioPlayer.src = BASE_URL + data.file + "?t=" + Date.now();
+    audioPlayer.style.display = "block";
+    await audioPlayer.play();
 
-  updateStatusStrip(); // remove typeof check
+    downloadBtn.disabled = false;
+
+    localStorage.removeItem(SCRIPT_KEY);
+
+    updateStatusStrip();
+
+  } catch (err) {
+
+    console.error("TTS ERROR:", err);
+    alert("Voice generation failed");
+
+  }
 }
-
 
 // -------------------------------
 // ⬇️ HANDLE DOWNLOAD AUDIO
