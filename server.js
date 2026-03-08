@@ -6,6 +6,8 @@ process.on("unhandledRejection", err => {
   console.error("UNHANDLED PROMISE:", err);
 });
 
+import dotenv from "dotenv";
+dotenv.config();
 import express from "express";
 import fetch from "node-fetch";
 import fs from "fs";
