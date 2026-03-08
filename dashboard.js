@@ -54,8 +54,7 @@ const scriptInput = byId("scriptInput");
 const generateBtn = byId("generateBtn");
 const downloadBtn = byId("downloadBtn");
 
-const BASE_URL = window.location.origin;
-
+const BASE_URL = "http://localhost:3000";
 // Audio
 const audioPlayer = byId("audioPlayer");
 const formatSelect = byId("formatSelect");
