@@ -3086,9 +3086,9 @@ function showAvatarBubble() {
   };
 }
 
-  } catch (err) {
-    console.error("bindUIEvents crash:", err);
-  }
+ // } catch (err) {
+ //   console.error("bindUIEvents crash:", err);
+//  }
 
 }
 
