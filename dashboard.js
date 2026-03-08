@@ -1410,36 +1410,45 @@ avatarMode = "image";
 
 // 🎧 Voice Preview Handler
 async function previewVoice() {
-
-  const selected = voiceSelect.value;
-  if (!selected) return;
-
-  if (!isPremium) {
-    const voice = VOICES.find(v => v.id === selected);
-    if (voice?.premium) {
-      return showCoach(
-        "🔒 This is a Premium voice",
-        () => openUpgradeModal()
-      );
+  
+  try {
+    
+    const selected = voiceSelect?.value;
+    if (!selected) return;
+    
+    if (!isPremium) {
+      const voice = VOICES.find(v => v.id === selected);
+      if (voice?.premium) {
+        return showCoach(
+          "🔒 This is a Premium voice",
+          () => openUpgradeModal()
+        );
+      }
     }
+    
+    const res = await fetch(BASE_URL + "/api/tts", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        text: "This is a preview of the selected voice.",
+        voiceId: selected,
+        preview: true
+      })
+    });
+    
+    const data = await res.json();
+    if (!data.success) return showCoach("Voice preview failed");
+    
+    const audio = new Audio(BASE_URL + data.file + "?t=" + Date.now());
+    audio.play();
+    
+  } catch (err) {
+    
+    console.error("previewVoice crash:", err);
+    
   }
-
-  const res = await fetch(BASE_URL + "/api/tts", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({
-    text: "This is a preview of the selected voice.",
-    voiceId: selected,
-    preview: true
-  })
-});
-
-const data = await res.json();
-if (!data.success) return showCoach("Voice preview failed");
-
-const audio = new Audio(BASE_URL + data.file + "?t=" + Date.now());
-audio.play();
-
+  
+}
 // 🎲 Random Voice Selector
 function randomVoice() {
 
@@ -3022,69 +3031,12 @@ formatSelect?.addEventListener("change", () => {
       tip("aiScriptBtn", "AI generates script ideas & rewrites");
     }
 
-    // ===================================
-// 👤 AVATAR CLICK SYSTEM
-// ===================================
-
-let avatarClickTimer = null;
-
-avatarWrap?.addEventListener("click", () => {
-
-  if (avatarClickTimer) {
-    clearTimeout(avatarClickTimer);
-    avatarClickTimer = null;
-
-    showAvatarBubble();
-    return;
-  }
-
-  avatarClickTimer = setTimeout(() => {
-    toggleAvatar();
-    avatarClickTimer = null;
-  }, 250);
-});
-
-function toggleAvatar() {
-
-  if (!avatarImage || !avatarInitials) return;
-
-  if (avatarMode === "image") {
-
-    avatarImage.classList.add("hidden");
-    avatarInitials.classList.remove("hidden");
-    avatarMode = "initials";
-
-  } else {
-
-    // Only switch to image if it exists
-    if (avatarImage.src && avatarImage.src.includes("/uploads/avatars/")) {
-      avatarInitials.classList.add("hidden");
-      avatarImage.classList.remove("hidden");
-      avatarMode = "image";
-    }
-
-  }
+} catch (err) {
+  console.error("bindUIEvents crash:", err);
 }
 
-function showAvatarBubble() {
-
-  const hasImage = avatarMode === "image";
-
-  avatarBubble.textContent =
-    hasImage
-      ? "Change your profile image"
-      : "Upload your profile image";
-
-  avatarBubble.classList.remove("hidden");
-
-  setTimeout(() => {
-    avatarBubble.classList.add("hidden");
-  }, 2500);
-
-  avatarBubble.onclick = () => {
-    avatarInput.click();
-  };
 }
+
 // ===============================
 // 🚀 INITIALIZE APP
 // ===============================
@@ -3122,5 +3074,4 @@ window.addEventListener("orientationchange", updateHeaderHeight);
   // 5️⃣ Initial UI sync
   updateStatusStrip();
   updateWelcomeBanner();
-
 });
