@@ -54,7 +54,7 @@ const scriptInput = byId("scriptInput");
 const generateBtn = byId("generateBtn");
 const downloadBtn = byId("downloadBtn");
 
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = "https://super-duper-computing-machine-4jr7pg9p99r6c74qx-3000.app.github.dev";
 // Audio
 const audioPlayer = byId("audioPlayer");
 const formatSelect = byId("formatSelect");
