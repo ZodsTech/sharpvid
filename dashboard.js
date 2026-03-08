@@ -3085,13 +3085,6 @@ function showAvatarBubble() {
     avatarInput.click();
   };
 }
-
- // } catch (err) {
- //   console.error("bindUIEvents crash:", err);
-//  }
-
-}
-
 // ===============================
 // 🚀 INITIALIZE APP
 // ===============================
