@@ -20,10 +20,14 @@ import { fileURLToPath } from "url";
 import admin from "firebase-admin";
 
 /* ===============================
-   🔐 Firebase Admin Init
+   🔐 Firebase Admin Init (FIXED)
 ================================= */
 admin.initializeApp({
-  credential: admin.credential.applicationDefault(),
+  credential: admin.credential.cert(
+    JSON.parse(
+      fs.readFileSync("./sharpvid-af7ed-firebase-adminsdk-fbsvc-1675bab692.json", "utf8")
+    )
+  ),
   databaseURL: "https://sharpvid-af7ed-default-rtdb.firebaseio.com"
 });
 
