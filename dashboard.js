@@ -2029,16 +2029,19 @@ async function handleGenerateVoiceClick() {
 
     localStorage.setItem("sharpvid_project", currentProjectId);
 
-    // 🔊 PLAY AUDIO (FIXED UNIVERSAL WAY)
-    audioPlayer.src = BASE_URL + data.file + "?t=" + Date.now();
-    audioPlayer.style.display = "block";
-    await audioPlayer.play();
+    // // 🔊 PLAY AUDIO (FIXED UNIVERSAL WAY)
+audioPlayer.src = BASE_URL + data.file + "?t=" + Date.now();
+audioPlayer.style.display = "block";
 
-    downloadBtn.disabled = false;
+try {
+  await audioPlayer.play();
+} catch (e) {
+  console.log("⚠️ Autoplay blocked — manual play needed");
+}
 
-    localStorage.removeItem(SCRIPT_KEY);
-
-    updateStatusStrip();
+downloadBtn.disabled = false;
+localStorage.removeItem(SCRIPT_KEY);
+updateStatusStrip();
 
   } catch (err) {
 
