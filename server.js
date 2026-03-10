@@ -798,27 +798,40 @@ try {
           `zoompan=z='min(zoom+0.001,1.08)':d=125:s=${width}x${height}[z${i}];`;
       });
 
-      let fades = "";
-      for (let i = 0; i < slides.length - 1; i++) {
-        const offset =
-          durations.slice(0, i + 1).reduce((a,b)=>a+b,0) - 1;
+      let finalVideoLabel;
 
-        if (i === 0) {
-          fades += `[z0][z1]xfade=fade:duration=1:offset=${offset}[v1];`;
-        } else {
-          fades += `[v${i}][z${i + 1}]xfade=fade:duration=1:offset=${offset}[v${i + 1}];`;
-        }
-      }
+if (slides.length === 1) {
 
-      const lastVid = `v${slides.length - 1}`;
-      let finalVideoLabel = lastVid;
+  finalVideoLabel = "z0";
+
+} else {
+
+  let fades = "";
+
+  for (let i = 0; i < slides.length - 1; i++) {
+
+    const offset =
+      durations.slice(0, i + 1).reduce((a,b)=>a+b,0) - 1;
+
+    if (i === 0) {
+      fades += `[z0][z1]xfade=fade:duration=1:offset=${offset}[v1];`;
+    } else {
+      fades += `[v${i}][z${i + 1}]xfade=fade:duration=1:offset=${offset}[v${i + 1}];`;
+    }
+
+  }
+
+  filterChain += fades;
+
+  finalVideoLabel = `v${slides.length - 1}`;
+}
 
       let watermarkFilter = "";
 
       if (!isPremium) {
         const wmPath = path.join(__dirname, "public", "watermark.png");
         watermarkFilter =
-          `;movie=${wmPath}[wm];` +
+          `;movie='${wmPath}'[wm];` +
           `[${lastVid}][wm]overlay=W-w-20:H-h-20[vout]`;
         finalVideoLabel = "vout";
       }
