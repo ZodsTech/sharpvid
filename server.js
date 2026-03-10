@@ -840,7 +840,7 @@ if (slides.length === 1) {
         `ffmpeg -y ` +
         inputs +
         `${audioInputArgs} ` +
-        -filter_complex "${filterChain}${watermarkFilter}" +
+        `-filter_complex "${filterChain}${watermarkFilter}"` +
         `-map "[${finalVideoLabel}]" ${audioMap} ` +
         `-c:v libx264 -preset veryfast -crf 23 ` +
         `-pix_fmt yuv420p -movflags +faststart ` +
