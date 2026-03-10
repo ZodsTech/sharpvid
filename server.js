@@ -55,6 +55,10 @@ app.use(cors({
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+// ✅ ADD HERE
+app.get("/", (req, res) => {
+  res.redirect("/dashboard.html");
+});
 
 /* ===============================
    📁 PROJECT ROOT (MUST BE ABOVE MULTER)
@@ -1827,11 +1831,6 @@ app.get("/api/usage/:uid", async (req, res) => {
   const used = usageStore.get(key) || 0;
 
   res.json({ used, limit });
-});
-
-// 🌍 Root Test Route
-app.get("/", (req, res) => {
-  res.send("SharpVid API is running ✅");
 });
 
 /* ===============================
