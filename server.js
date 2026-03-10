@@ -457,6 +457,7 @@ app.post("/api/upload-music", uploadMusic.single("music"), (req, res) => {
 ================================= */
 app.post("/api/tts", async (req, res) => {
   try {
+
     const { text, voiceId } = req.body;
     if (!text) return res.status(400).json({ error: "Text is required" });
 
@@ -480,9 +481,15 @@ app.post("/api/tts", async (req, res) => {
 
     const data = await response.json();
 
+    // 🔥 NEW (REAL FIX)
+    if (!response.ok) {
+      console.error("❌ Google TTS HTTP Error:", data);
+      return res.status(500).json({ error: "Google TTS failed" });
+    }
+
     if (!data.audioContent) {
-      console.error("❌ Google TTS Error:", data);
-      return res.status(400).json({ error: "TTS failed" });
+      console.error("❌ Google TTS Missing Audio:", data);
+      return res.status(500).json({ error: "TTS returned no audio" });
     }
 
     const uid = req.body.uid || "anon";
@@ -493,8 +500,8 @@ app.post("/api/tts", async (req, res) => {
       getSceneRoot(uid, projectId, sceneId),
       "audio"
     );
-    fs.mkdirSync(audioDir, { recursive: true });
 
+    ensureDirSafe(audioDir);
 
     fs.writeFileSync(
       path.join(audioDir, "voice.mp3"),
@@ -506,11 +513,14 @@ app.post("/api/tts", async (req, res) => {
     res.json({
       success: true,
       projectId,
-    file: `/projects/${uid}/${projectId}/scenes/${sceneId}/audio/voice.mp3`});
+      file: `/projects/${uid}/${projectId}/scenes/${sceneId}/audio/voice.mp3`
+    });
 
   } catch (err) {
-    console.error("❌ TTS Error:", err);
-    res.status(500).json({ error: err.message });
+
+    console.error("❌ TTS SERVER CRASH:", err);
+    res.status(500).json({ error: "Server TTS crash" });
+
   }
 });
 
@@ -832,7 +842,7 @@ if (slides.length === 1) {
         const wmPath = path.join(__dirname, "public", "watermark.png");
         watermarkFilter =
           `;movie='${wmPath}'[wm];` +
-          `[${lastVid}][wm]overlay=W-w-20:H-h-20[vout]`;
+          `[${finalVideoLabel}][wm]overlay=W-w-20:H-h-20[vout]`;
         finalVideoLabel = "vout";
       }
 
